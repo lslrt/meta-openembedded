@@ -6,8 +6,11 @@ RequiresMountsFor=/var
 User=root
 ExecStartPre=/bin/mkdir -p /var/log/netdata
 ExecStartPre=/bin/chown -R nobody.netdata @@datadir/netdata/web
+ExecStartPre=/bin/mkdir -p /var/cache/netdata
 ExecStartPre=/bin/chown -R nobody.netdata /var/cache/netdata
-ExecStart=/usr/sbin/netdata -nd
+ExecStartPre=/bin/mkdir -p /var/lib/netdata
+ExecStartPre=/bin/chown -R nobody.netdata /var/lib/netdata
+ExecStart=/usr/sbin/netdata -D
 
 [Install]
 WantedBy=multi-user.target
